@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Contact the Vendly team — support for buyers and sellers on our local marketplace." />
+<title>Contact — Vendly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo"><span class="mark">🛍️</span> Vendly</a>
+    <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <nav class="nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="sell.html">Sell</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="top-actions">
+      <button class="cart-btn" id="cartBtn">🛒 <span>Cart</span> <span class="cart-count" data-cart-count>0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <span class="eyebrow">Get in touch</span>
+    <h1>We’d love to hear from you</h1>
+    <p>Questions about buying, selling, or partnering with Vendly? Send us a message and we’ll get back to you within one working day.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:10px;">
+  <div class="container">
+    <div class="grid grid-3" style="margin-bottom:36px;">
+      <div class="info-card">
+        <div class="ico">✉️</div>
+        <h3>Email us</h3>
+        <p>hello@vendly.example<br>support@vendly.example</p>
+      </div>
+      <div class="info-card">
+        <div class="ico">📞</div>
+        <h3>Call us</h3>
+        <p>Mon–Fri, 9am–6pm<br>+1 (555) 010-2025</p>
+      </div>
+      <div class="info-card">
+        <div class="ico">📍</div>
+        <h3>Visit us</h3>
+        <p>12 Market Lane<br>Old Town, OT1 2AB</p>
+      </div>
+    </div>
+
+    <form class="form-card" id="contactForm">
+      <div class="field-row">
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" required placeholder="Jane Doe" />
+        </div>
+        <div class="field">
+          <label for="c-email">Email address</label>
+          <input id="c-email" type="email" required placeholder="jane@example.com" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="c-subject">I’m writing about</label>
+        <select id="c-subject">
+          <option>Buying on Vendly</option>
+          <option>Selling on Vendly</option>
+          <option>Partnership / press</option>
+          <option>Something else</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="c-msg">Your message</label>
+        <textarea id="c-msg" required placeholder="How can we help?"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="logo" style="margin-bottom:12px;"><span class="mark">🛍️</span> Vendly</a>
+        <p style="color:var(--muted);font-size:.9rem;max-width:280px;">Your local marketplace for homemade goods, food &amp; products.</p>
+      </div>
+      <div>
+        <h4>Marketplace</h4>
+        <a href="shop.html">Shop all</a>
+        <a href="sell.html">Start selling</a>
+        <a href="index.html">Categories</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="#">Help centre</a>
+        <a href="#">Seller guide</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Vendly. Made with ❤️ for local communities.</span>
+      <span>Built for makers, by makers.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-head"><h2>Your basket</h2><button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button></div>
+  <div class="cart-list" id="cartList"></div>
+  <div class="cart-foot" id="cartFoot">
+    <div class="total-row"><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div>
+    <p class="cart-note">Local pickup or delivery arranged directly with the maker.</p>
+    <button class="checkout" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+<div class="modal" id="productModal"><div class="modal-card" id="productModalCard"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  toast('Message sent — we’ll reply soon! ✉️');
+  e.target.reset();
+});
+</script>
+</body>
+</html>

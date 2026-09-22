@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Browse all homemade goods, food, and crafts from local makers on Vendly." />
+<title>Shop — Vendly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo"><span class="mark">🛍️</span> Vendly</a>
+    <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <nav class="nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="sell.html">Sell</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="top-actions">
+      <button class="cart-btn" id="cartBtn">🛒 <span>Cart</span> <span class="cart-count" data-cart-count>0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <span class="eyebrow">The marketplace</span>
+    <h1>Browse local goods</h1>
+    <p>Handmade, homegrown, and made with care — all from makers in your community.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head" style="align-items:center;">
+      <div style="flex:1;min-width:240px;">
+        <input id="shopSearch" type="search" placeholder="🔍 Search products, makers, or towns…"
+          style="width:100%;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;outline:none;" />
+      </div>
+      <select id="shopSort" style="padding:11px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-weight:600;cursor:pointer;outline:none;">
+        <option value="newest">Newest first</option>
+        <option value="price-asc">Price: low → high</option>
+        <option value="price-desc">Price: high → low</option>
+        <option value="name">Name: A → Z</option>
+      </select>
+    </div>
+
+    <div class="chips" id="shopChips" style="margin-bottom:24px;"></div>
+
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:18px;">
+      <strong id="shopCount">0</strong> products found
+    </p>
+
+    <div class="grid" id="shopGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="logo" style="margin-bottom:12px;"><span class="mark">🛍️</span> Vendly</a>
+        <p style="color:var(--muted);font-size:.9rem;max-width:280px;">Your local marketplace for homemade goods, food &amp; products.</p>
+      </div>
+      <div>
+        <h4>Marketplace</h4>
+        <a href="shop.html">Shop all</a>
+        <a href="sell.html">Start selling</a>
+        <a href="index.html">Categories</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="#">Help centre</a>
+        <a href="#">Seller guide</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Vendly. Made with ❤️ for local communities.</span>
+      <span>Built for makers, by makers.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h2>Your basket</h2>
+    <button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-list" id="cartList"></div>
+  <div class="cart-foot" id="cartFoot">
+    <div class="total-row"><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div>
+    <p class="cart-note">Local pickup or delivery arranged directly with the maker.</p>
+    <button class="checkout" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+<div class="modal" id="productModal"><div class="modal-card" id="productModalCard"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('shopGrid');
+  const chipsEl = document.getElementById('shopChips');
+  const searchEl = document.getElementById('shopSearch');
+  const sortEl = document.getElementById('shopSort');
+  const countEl = document.getElementById('shopCount');
+
+  const params = new URLSearchParams(location.search);
+  const state = {
+    category: params.get('cat') || 'All',
+    query: params.get('q') || '',
+    sort: 'newest'
+  };
+  if (state.query) searchEl.value = state.query;
+
+  chipsEl.innerHTML = CATEGORIES.map(c =>
+    `<button class="chip ${c === state.category ? 'active' : ''}" data-cat="${c}">${c}</button>`
+  ).join('');
+
+  function render() {
+    let list = VENDLY.products.slice();
+    const q = state.query.trim().toLowerCase();
+    if (q) list = list.filter(p =>
+      `${p.name} ${p.seller} ${p.location} ${p.category} ${p.desc}`.toLowerCase().includes(q)
+    );
+    if (state.category !== 'All') list = list.filter(p => p.category === state.category);
+
+    switch (state.sort) {
+      case 'price-asc':  list.sort((a,b)=>a.price-b.price); break;
+      case 'price-desc': list.sort((a,b)=>b.price-a.price); break;
+      case 'name':       list.sort((a,b)=>a.name.localeCompare(b.name)); break;
+      default:           list.sort((a,b)=>b.id-a.id);
+    }
+
+    countEl.textContent = list.length;
+
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty"><span>🔍</span><h3>No products found</h3><p>Try a different search or category.</p></div>`;
+      return;
+    }
+    grid.innerHTML = list.map(productCardHTML).join('');
+  }
+
+  chipsEl.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    state.category = chip.dataset.cat;
+    chipsEl.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+    render();
+  });
+  searchEl.addEventListener('input', e => { state.query = e.target.value; render(); });
+  sortEl.addEventListener('change', e => { state.sort = e.target.value; render(); });
+
+  render();
+});
+</script>
+</body>
+</html>

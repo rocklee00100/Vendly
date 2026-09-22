@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="List your homemade product on Vendly in minutes. Reach local buyers and grow your business." />
+<title>Sell your product — Vendly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo"><span class="mark">🛍️</span> Vendly</a>
+    <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <nav class="nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="sell.html" class="active">Sell</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="top-actions">
+      <button class="cart-btn" id="cartBtn">🛒 <span>Cart</span> <span class="cart-count" data-cart-count>0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <span class="eyebrow">Start selling</span>
+    <h1>List your product in minutes</h1>
+    <p>Reach local buyers in your town. No listing fees, no long forms — just tell us what you make.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:10px;">
+  <div class="container">
+    <form class="form-card" id="sellForm">
+      <div class="field">
+        <label for="f-name">Product name</label>
+        <input id="f-name" required placeholder="e.g. Sourdough Loaf" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-price">Price</label>
+          <input id="f-price" type="number" min="0.5" step="0.5" required placeholder="8.50" />
+        </div>
+        <div class="field">
+          <label for="f-cat">Category</label>
+          <select id="f-cat"></select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-seller">Your name / shop</label>
+          <input id="f-seller" required placeholder="Maya's Kitchen" />
+        </div>
+        <div class="field">
+          <label for="f-loc">Town / area</label>
+          <input id="f-loc" required placeholder="Eastwood" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-emoji">Pick an icon</label>
+        <select id="f-emoji">
+          <option>🍞</option><option>🍯</option><option>🧶</option><option>🕯️</option>
+          <option>🧼</option><option>🍪</option><option>🫙</option><option>🎨</option>
+          <option>🧵</option><option>🌻</option><option>🧁</option><option>🪵</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="f-desc">Short description</label>
+        <textarea id="f-desc" required placeholder="Tell buyers what makes it special…"></textarea>
+        <div class="field-hint">Keep it to one or two sentences — buyers love specifics.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;margin-top:8px;">Publish my listing</button>
+    </form>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface);border-top:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;">
+      <h2>Why sell on Vendly?</h2>
+      <p>Everything you need to turn a hobby into a little business.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="feature">
+        <div class="ico">💸</div>
+        <h3>No listing fees</h3>
+        <p>Publishing is free. You only pay a small commission when a sale is completed.</p>
+      </div>
+      <div class="feature">
+        <div class="ico">📸</div>
+        <h3>Simple listings</h3>
+        <p>Add a name, price, and description — done. No need for a website or shop.</p>
+      </div>
+      <div class="feature">
+        <div class="ico">🧑‍🤝‍🧑</div>
+        <h3>Local customers</h3>
+        <p>Buyers in your area see your products first, so pickup is quick and easy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="logo" style="margin-bottom:12px;"><span class="mark">🛍️</span> Vendly</a>
+        <p style="color:var(--muted);font-size:.9rem;max-width:280px;">Your local marketplace for homemade goods, food &amp; products.</p>
+      </div>
+      <div>
+        <h4>Marketplace</h4>
+        <a href="shop.html">Shop all</a>
+        <a href="sell.html">Start selling</a>
+        <a href="index.html">Categories</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="#">Help centre</a>
+        <a href="#">Seller guide</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Vendly. Made with ❤️ for local communities.</span>
+      <span>Built for makers, by makers.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h2>Your basket</h2>
+    <button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-list" id="cartList"></div>
+  <div class="cart-foot" id="cartFoot">
+    <div class="total-row"><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div>
+    <p class="cart-note">Local pickup or delivery arranged directly with the maker.</p>
+    <button class="checkout" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+<div class="modal" id="productModal"><div class="modal-card" id="productModalCard"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Populate category select (skip "All")
+  document.getElementById('f-cat').innerHTML =
+    CATEGORIES.filter(c => c !== 'All').map(c => `<option>${c}</option>`).join('');
+
+  const palettes = [
+    ['#f5d9b0','#e8b877'], ['#d8c7f0','#a98fd6'], ['#bfe3f0','#7db9d6'],
+    ['#ffd6e8','#f0a0c4'], ['#d6e8c4','#a3c47c'], ['#f7cfc0','#e39a80']
+  ];
+
+  document.getElementById('sellForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const [c1, c2] = palettes[Math.floor(Math.random() * palettes.length)];
+    const product = {
+      id: Date.now(),
+      name:   document.getElementById('f-name').value.trim(),
+      price:  parseFloat(document.getElementById('f-price').value),
+      category: document.getElementById('f-cat').value,
+      seller: document.getElementById('f-seller').value.trim(),
+      location: document.getElementById('f-loc').value.trim(),
+      emoji:  document.getElementById('f-emoji').value,
+      desc:   document.getElementById('f-desc').value.trim(),
+      c1, c2, badge: 'New'
+    };
+    VENDLY.products.unshift(product);
+    saveProducts();
+    toast('Listing published! Taking you to your product…');
+    setTimeout(() => location.href = 'shop.html', 800);
+  });
+});
+</script>
+</body>
+</html>
